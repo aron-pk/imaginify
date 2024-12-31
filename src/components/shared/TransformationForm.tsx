@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState, useTransition } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import React, { useState, useTransition } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import {
   Select,
@@ -11,9 +11,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -22,18 +22,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   aspectRatioOptions,
   defaultValues,
   transformationTypes,
-} from "@/constants";
-import { CustomField } from "./CustomFIeld";
-import { AspectRatioKey, debounce } from "@/lib/utils";
-import { updateCredits } from "@/lib/actions/user.actions";
-import { deepMergeObjects } from "../../lib/utils";
-import MediaUploader from "./MediaUploader";
+} from '@/constants';
+import { CustomField } from './CustomFIeld';
+import { AspectRatioKey, debounce } from '@/lib/utils';
+import { updateCredits } from '@/lib/actions/user.actions';
+import { deepMergeObjects } from '../../lib/utils';
+import MediaUploader from './MediaUploader';
 
 export const formSchema = z.object({
   title: z.string(),
@@ -61,7 +61,7 @@ const TransformationForm = ({
   const [isPending, startTransition] = useTransition();
 
   const initialValues =
-    data && action === "Update"
+    data && action === 'Update'
       ? {
           title: data?.title,
           aspectRatio: data?.aspectRatio,
@@ -109,7 +109,7 @@ const TransformationForm = ({
         ...prevState,
         [type]: {
           ...prevState?.[type],
-          [fieldName === "prompt" ? "prompt" : "to"]: value,
+          [fieldName === 'prompt' ? 'prompt' : 'to']: value,
         },
       }));
 
@@ -143,7 +143,7 @@ const TransformationForm = ({
           render={({ field }) => <Input {...field} className="input-field" />}
         />
 
-        {type === "fill" && (
+        {type === 'fill' && (
           <CustomField
             control={form.control}
             name="aspectRatio"
@@ -170,13 +170,13 @@ const TransformationForm = ({
           />
         )}
 
-        {(type === "remove" || type === "recolor") && (
+        {(type === 'remove' || type === 'recolor') && (
           <div className="prompt-field">
             <CustomField
               control={form.control}
               name="prompt"
               formLabel={
-                type === "remove" ? "Object to remove" : "Object to recolor"
+                type === 'remove' ? 'Object to remove' : 'Object to recolor'
               }
               className="w-full"
               render={({ field }) => (
@@ -185,7 +185,7 @@ const TransformationForm = ({
                   className="input-field"
                   onChange={(e) =>
                     onInputChangeHandler(
-                      "prompt",
+                      'prompt',
                       e.target.value,
                       type,
                       field.onChange
@@ -195,7 +195,7 @@ const TransformationForm = ({
               )}
             />
 
-            {type === "recolor" && (
+            {type === 'recolor' && (
               <CustomField
                 control={form.control}
                 name="color"
@@ -207,9 +207,9 @@ const TransformationForm = ({
                     className="input-field"
                     onChange={(e) =>
                       onInputChangeHandler(
-                        "color",
+                        'color',
                         e.target.value,
-                        "recolor",
+                        'recolor',
                         field.onChange
                       )
                     }
@@ -220,7 +220,7 @@ const TransformationForm = ({
           </div>
         )}
 
-        <div className="media-uploader-field">
+        {/* <div className="media-uploader-field">
           <CustomField
             control={form.control}
             name="publicId"
@@ -235,7 +235,7 @@ const TransformationForm = ({
               />
             )}
           />
-        </div>
+        </div> */}
 
         <div className="flex flex-col gap-4">
           <Button
@@ -244,14 +244,14 @@ const TransformationForm = ({
             disabled={isTransforming || newTransformation === null}
             onClick={onTransformHandler}
           >
-            {isTransforming ? "Transforming..." : "Apply Transformation"}
+            {isTransforming ? 'Transforming...' : 'Apply Transformation'}
           </Button>
           <Button
             type="submit"
             className="submit-button capitalize"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Submitting..." : "Save"}
+            {isSubmitting ? 'Submitting...' : 'Save'}
           </Button>
         </div>
       </form>
